@@ -1,0 +1,48 @@
+  <div class="container">
+    <p id="notice"></p>
+    <h2>User info</h2>
+    
+      <% if @user.errors.any? %>
+        <div id=“error_explanation”>
+          <h5><%= @user.errors.count %>件のerrorが発生しました。</h5>
+          <ul>
+            <% @user.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+  
+      <%= form_with model: @user, url: user_path, local: true do |f|%>
+  
+        <div class="field">
+          <%= f.label :Name %><br>
+          <%= f.text_field :name, class: "name" %>
+        </div>
+  
+        <div class="field">
+          <%= f.label :Image %><br>
+          <%= f.attachment_field :profile_image, class: "user_image" %>
+        </div>
+  
+        <div class="field">
+          <%= f.label :Introduction %><br>
+          <%= f.text_field :introduction, class: "introduction" %>
+        </div>
+  
+        <div class="actions">
+          <%= f.submit "Update User" %>
+        </div>
+      <% end %>
+  </div>
+
+
+  <footer>
+    <div class="container">
+    	<div class="row">
+      	<div class="col-xs-3 col-xs-offset-9">
+      		<p>CopyRight Infratop.inc</p>
+      	</div>
+      </div>
+    </div>
+  </footer>
