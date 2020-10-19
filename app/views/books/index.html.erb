@@ -29,6 +29,27 @@
                 </td>
                 <td><%= link_to book.title, book_path(book.id) %></td>
                 <td><%= book.body %></td>
+                            
+            <!--いいね機能実装部分-->
+            
+                <% if book.favorited_by?(current_user) %>
+                <td>
+                  <%= link_to book_favorites_path(book), method: :delete do %>
+                    <i class="glyphicon glyphicon-heart" aria-hidden="true" style="color: red;"></i>
+                    <%= book.favorites.count %> いいね
+                  <% end %>
+                </td>
+                <% else %>
+                <td>
+                  <%= link_to book_favorites_path(book), method: :post do %>
+                    <i class="glyphicon glyphicon-heart-empty" aria-hidden="true"></i>
+                    <%= book.favorites.count %> いいね
+                  <% end %>
+                </td>
+                <% end %>
+              <!--いいね数表示部分-->
+              
+                <td><%= book.favorites.count %> いいね</td>
                 <td>コメント数：<%= book.comments.count %></td>
               </tr>
              <% end %>
