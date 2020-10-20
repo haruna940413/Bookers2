@@ -1,8 +1,14 @@
 <div class="container">
   <div class="row">
 
-    <!--左側-->
-    <%= render "users/list", user: @user, book: @book %>
+　　<!--@user = User.find(params[:id])　　@book = Book.new　@books = @user.books　-->
+    <!--左側(上はログインしているユーザーと違うユーザーの詳細画面の時のサイドバー)-->
+
+    <% if current_user != @user %> 
+      <%= render "users/list2", user: @user, book: @book %>
+    <% else %>
+      <%= render "users/list", user: @user, book: @book %>
+    <% end %>
     
     <!--右側-->
 
@@ -15,6 +21,7 @@
              <th></th>
              <th>Title</th>
              <th>Opinion</th>
+             <th>comment</th>
              <th colspan="3"></th>
           </tr>
         </thead>
