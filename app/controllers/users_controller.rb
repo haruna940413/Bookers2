@@ -42,6 +42,12 @@ class UsersController < ApplicationController
       render("users/edit")
     end
   end
+  
+    def search
+     method = params[:search_method]
+     word = params[:search_word]
+     @users = User.search(method,word)
+    end
 
 protected
  def user_params
