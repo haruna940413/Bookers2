@@ -33,21 +33,29 @@
       </div>
     </header>
 
-    <!--検索機能-->
-
-    <% if user_signed_in? %>
-      <%= form_with url: search_path, method: :get, data: {remote: false} do |f| %>
-      <table class="search-table">
-        <tr>
-          <th><%= f.select :model_name, {'User': '1' , 'Book': '2'}, { include_blank: '選択してください'}, {class: "flex-item" , required: true} %></th>
-          <th><%= select(@search_content, :search_method, [["前方一致","forward_match"], ["後方一致","backward_match"], ["完全一致","perfect_match"], ["部分一致","partial_match"]])%></th>
-          <th><%= text_field_tag :search %></th>
-          <th><%= submit_tag '検索', :name => nil %></th>
-        </tr>
-      </table>
-      <% end %>
-    <% end %>
-
+    <!--検索機能真ん中寄せ-->
+    
+　　<div class="container-fluid">
+    	<div class="row">
+    		<div class="col-md-4"></div>
+    		<div class="col-md-4">
+        <% if user_signed_in? %>
+          <%= form_with url: search_path, method: :get, data: {remote: false} do |f| %>
+          <table class="search-table">
+            <tr>
+              <th><%= f.select :model_name, {'User': '1' , 'Book': '2'}, { include_blank: '選択してください'}, {class: "flex-item" , required: true} %></th>
+              <th><%= select(@search_content, :search_method, [["前方一致","forward_match"], ["後方一致","backward_match"], ["完全一致","perfect_match"], ["部分一致","partial_match"]])%></th>
+              <th><%= text_field_tag :search %></th>
+              <th><%= submit_tag '検索', :name => nil %></th>
+            </tr>
+          </table>
+          <% end %>
+        <% end %>
+        </div>
+		    <div class="col-md-4"></div>
+	    </div>
+    </div>
+    
     <!--フラッシュメッセージ-->
 
     <% if flash[:notice] %>
