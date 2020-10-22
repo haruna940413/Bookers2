@@ -1,0 +1,46 @@
+<!--コメント一覧-->
+
+<table>
+  <thead></thead>
+  <tbody>
+  <% comments.each do |comment| %>
+    <tr>
+      <td>
+        <%= attachment_image_tag comment.user, :profile_image, :fill, 40, 40, fallback: "no-image.jpg" %><br />
+        <%= comment.user.name %>
+      </td>
+      <td><%= comment.comment %></td>
+      <% if user_signed_in? && comment.user_id == current_user.id %>
+       <td><%= link_to "Destroy" , book_comment_path(book.id, comment.id), method: :delete, class: "btn-sm btn-danger", "data-confirm" => "本当に消しますか？", remote: true  %></td>
+      <% end %>
+      <br>
+    </tr>
+  <% end %>  
+  </tbody>
+</table>      
+
+<!--コメント投稿フォーム-->
+<%= form_with(model:[book, newcomment], remote: true) do |f| %>
+　<!--コメント投稿フォーム分エラー文-->
+  <% if newcomment.errors.any? %>
+    <div id=“error_explanation”>
+      <h5><%= newcomment.errors.count %>件のerrorが発生しました。</h5>
+      <ul>
+        <% newcomment.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <!--投稿フォーム-->
+ <div class="row">
+      <div class="col-xs-12">
+        <%= f.text_area :comment, rows:'5', class: "form-control",placeholder: "コメントをここに" %>
+      </div>
+  </div>
+  <%= f.submit "送信する", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
+<% end %>
+
+
+
+
